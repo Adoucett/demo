@@ -1,0 +1,244 @@
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Branch and ATM Walking Distance</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+
+<body>
+
+
+
+<style>
+#map {
+    position: fixed;
+    width:60%;
+
+}
+
+
+#features {
+    width: 40%;
+    margin-left: 60%;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+section {
+    padding:  55px 50px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 18px;
+}
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 500px;
+}
+</style>
+
+<div id='map'></div>
+<div id='features'>
+    <section id='Map_Overview' class='active'>
+        <h2>Santander Bank Mapping Demo</h2>
+        <p><span style="color: #999999;">Designed by Aaron Doucett - July 16, 2018</span></p>
+        <p>&nbsp;</p>
+        <h3>Map Overview</h3>
+		
+		<p><img alt="" height="148" src="https://i.imgur.com/jkScK8h.png" style="fixed: left;" width="400">
+		
+	        <p><strong>This map analyzes approximately 200 Santander Bank branches and ATM locations within the I-95 corridor in the Metro Boston area.</strong></p>
+<p>&nbsp;A pedestrian walking distance is calculated using ArcMap using streets and sidewalks, assuming a 3 mph walking speed. Areas with good coverage are shown in blues, where areas requiring a lengthy walk are displayed in orange and red. The final map is rendered using Mapbox GL JS. 
+ </p>
+
+
+<h3 style="color: #5e9ca0;"><span style="color: #000080;"><a style="color: #000080;" href="https://api.mapbox.com/styles/v1/adoucett/cjjomzr1k6ume2sqr3xe5iut1.html?fresh=true&amp;title=true&amp;access_token=pk.eyJ1IjoiYWRvdWNldHQiLCJhIjoiY2lvZDFsc2lwMDRnd3Zha2pneWpxcHh6biJ9.sbWgw2zPGyScsp-r4CYQnA#12.2/42.334311/-71.074845/0">You can also explore the map in full screen here</a></span></h3>
+
+<h3 style="text-align: center;">&darr;&darr; Scroll down to begin&nbsp;&darr;&darr;</h3>
+    </section>
+    <section id='Harvard_Square'>
+        <h3>Harvard Square</h3>
+		
+	<p>The Harvard Square branch is located at&nbsp;1420 Massachusetts Ave,&nbsp;Cambridge. One of the central business districts and a hub for nightlife in Cambridge, Harvard Square also serves as one of the busiest tourism destinations in the Boston metro area.&nbsp;</p>
+
+		
+		<p><div class="LocationInfo-hours"><div class="c-location-hours"><h4 class="c-location-hours-title" aria-level="4">Branch Hours</h4><div class="c-location-hours-details-wrapper js-location-hours" data-days="[{&quot;day&quot;:&quot;MONDAY&quot;,&quot;intervals&quot;:[{&quot;end&quot;:1700,&quot;start&quot;:900}]},{&quot;day&quot;:&quot;TUESDAY&quot;,&quot;intervals&quot;:[{&quot;end&quot;:1700,&quot;start&quot;:900}]},{&quot;day&quot;:&quot;WEDNESDAY&quot;,&quot;intervals&quot;:[{&quot;end&quot;:1700,&quot;start&quot;:900}]},{&quot;day&quot;:&quot;THURSDAY&quot;,&quot;intervals&quot;:[{&quot;end&quot;:1800,&quot;start&quot;:900}]},{&quot;day&quot;:&quot;FRIDAY&quot;,&quot;intervals&quot;:[{&quot;end&quot;:1800,&quot;start&quot;:900}]},{&quot;day&quot;:&quot;SATURDAY&quot;,&quot;intervals&quot;:[{&quot;end&quot;:1400,&quot;start&quot;:900}]},{&quot;day&quot;:&quot;SUNDAY&quot;,&quot;intervals&quot;:[]}]" data-showopentoday="false" data-highlighttoday="true"><table class="c-location-hours-details"><thead class="sr-only"><tr><th>Day of the Week</th><th>Hours</th></tr></thead><tbody><tr class="c-location-hours-details-row js-day-of-week-row highlight-text is-today js-is-today" data-day-of-week-start-index="0" data-day-of-week-end-index="0" itemprop="openingHours" content="Mo 09:00-17:00"><td class="c-location-hours-details-row-day">Mon</td><td class="c-location-hours-details-row-intervals"><span class="c-location-hours-details-row-intervals-instance js-location-hours-interval-instance" data-twenty-four-hour-clock="false" data-open-interval-start="900" data-open-interval-end="1700" data-midnight-text="Open until midnight" data-open-until-text="Open until" data-close-at-text="Closed at">Closed at <span class="c-location-hours-today-day-hours-end-hour currentlyClosed">5:00 PM</span></span></td></tr><tr class="c-location-hours-details-row js-day-of-week-row highlight-text" data-day-of-week-start-index="1" data-day-of-week-end-index="1" itemprop="openingHours" content="Tu 09:00-17:00"><td class="c-location-hours-details-row-day">Tue</td><td class="c-location-hours-details-row-intervals"><span class="c-location-hours-details-row-intervals-instance js-location-hours-interval-instance" data-twenty-four-hour-clock="false" data-open-interval-start="900" data-open-interval-end="1700" data-midnight-text="Open until midnight" data-open-until-text="Open until" data-close-at-text="Closed at"><span class="c-location-hours-details-row-intervals-instance-open">9:00 AM</span><span class="c-location-hours-details-row-intervals-instance-separator" aria-label="To"> - </span><span class="c-location-hours-details-row-intervals-instance-close">5:00 PM</span></span></td></tr><tr class="c-location-hours-details-row js-day-of-week-row highlight-text" data-day-of-week-start-index="2" data-day-of-week-end-index="2" itemprop="openingHours" content="We 09:00-17:00"><td class="c-location-hours-details-row-day">Wed</td><td class="c-location-hours-details-row-intervals"><span class="c-location-hours-details-row-intervals-instance js-location-hours-interval-instance" data-twenty-four-hour-clock="false" data-open-interval-start="900" data-open-interval-end="1700" data-midnight-text="Open until midnight" data-open-until-text="Open until" data-close-at-text="Closed at"><span class="c-location-hours-details-row-intervals-instance-open">9:00 AM</span><span class="c-location-hours-details-row-intervals-instance-separator" aria-label="To"> - </span><span class="c-location-hours-details-row-intervals-instance-close">5:00 PM</span></span></td></tr><tr class="c-location-hours-details-row js-day-of-week-row highlight-text" data-day-of-week-start-index="3" data-day-of-week-end-index="3" itemprop="openingHours" content="Th 09:00-18:00"><td class="c-location-hours-details-row-day">Thu</td><td class="c-location-hours-details-row-intervals"><span class="c-location-hours-details-row-intervals-instance js-location-hours-interval-instance" data-twenty-four-hour-clock="false" data-open-interval-start="900" data-open-interval-end="1800" data-midnight-text="Open until midnight" data-open-until-text="Open until" data-close-at-text="Closed at"><span class="c-location-hours-details-row-intervals-instance-open">9:00 AM</span><span class="c-location-hours-details-row-intervals-instance-separator" aria-label="To"> - </span><span class="c-location-hours-details-row-intervals-instance-close">6:00 PM</span></span></td></tr><tr class="c-location-hours-details-row js-day-of-week-row highlight-text" data-day-of-week-start-index="4" data-day-of-week-end-index="4" itemprop="openingHours" content="Fr 09:00-18:00"><td class="c-location-hours-details-row-day">Fri</td><td class="c-location-hours-details-row-intervals"><span class="c-location-hours-details-row-intervals-instance js-location-hours-interval-instance" data-twenty-four-hour-clock="false" data-open-interval-start="900" data-open-interval-end="1800" data-midnight-text="Open until midnight" data-open-until-text="Open until" data-close-at-text="Closed at"><span class="c-location-hours-details-row-intervals-instance-open">9:00 AM</span><span class="c-location-hours-details-row-intervals-instance-separator" aria-label="To"> - </span><span class="c-location-hours-details-row-intervals-instance-close">6:00 PM</span></span></td></tr><tr class="c-location-hours-details-row js-day-of-week-row highlight-text" data-day-of-week-start-index="5" data-day-of-week-end-index="5" itemprop="openingHours" content="Sa 09:00-14:00"><td class="c-location-hours-details-row-day">Sat</td><td class="c-location-hours-details-row-intervals"><span class="c-location-hours-details-row-intervals-instance js-location-hours-interval-instance" data-twenty-four-hour-clock="false" data-open-interval-start="900" data-open-interval-end="1400" data-midnight-text="Open until midnight" data-open-until-text="Open until" data-close-at-text="Closed at"><span class="c-location-hours-details-row-intervals-instance-open">9:00 AM</span><span class="c-location-hours-details-row-intervals-instance-separator" aria-label="To"> - </span><span class="c-location-hours-details-row-intervals-instance-close">2:00 PM</span></span></td></tr><tr class="c-location-hours-details-row js-day-of-week-row highlight-text" data-day-of-week-start-index="6" data-day-of-week-end-index="6" itemprop="openingHours" content="Su Closed"><td class="c-location-hours-details-row-day">Sun</td><td class="c-location-hours-details-row-intervals">Closed</td></tr></tbody></table></div></div></div></p>
+        </p>
+		
+		
+		
+    </section>
+    <section id='South_Boston'>
+        <h3>South Boston</h3>
+        <p>South Boston is served by the branch located at 474 West Broadway. While the area around Dorchester Street and East Broadway is well served, some locations in the mostly residential City Point neighborhood are lacking coverage. </p>
+        
+        <p><img src="https://i.imgur.com/MyYJ6OJ.jpg" alt="" width="528" height="420" /></p>
+        
+        </section>
+    <section id='Coolidge_Corner'>
+        <h3>Coolidge Corner</h3>
+        <p>The commercial center of Beacon Street and Commonwealth Avenue off the MBTA Green Line are served by a number of ATM locations, including a branch at 1341 Beacon St in Brookline. 
+		</p>
+		
+		<p>&nbsp;<img src="https://i.imgur.com/kE7RaCU.jpg" alt="" width="528" height="299" /></p>
+		
+    </section>
+    <section id='East_Boston'>
+        <h3>East Boston</h3>
+        <p>East Boston is served by a Santander branch location at&nbsp;2 Meridian Street, along with an ATM locations at the nearby CVS. The recently re-devloped East Pier (approximately 300 residences) is currently a 12+ minute walk to the nearest branch.&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="https://i.imgur.com/kTbax9T.jpg" alt="" width="627" height="363" /></p>
+
+
+    </section>
+    <section id='Medford'>
+        <h3>Medford</h3>
+        <p>The City of Medford is served by two CVS - ATM locations, on either side of Medford Square. An additioanal CVS location is located near Wellington Square, on the Organge line.&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="https://i.imgur.com/vNAbsXE.jpg" /></p>
+<p>&nbsp;</p>
+    </section>
+    <section id='Salem'>
+        <h3>Salem</h3>
+<p>Downtown Salem is one of New England's most popular tourist destinations, home to numerous museums, historic theaters, restaurants,&nbsp; and host to the world famous Salem Halloween festivities.</p>
+<p>Downtown is well served by a main branch and multiple ATM locations, although sections of Lafayette and Canal streets proximal to several small businesses lack coverage.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="https://www.themerchantsalem.com/wp-content/img_dyn/v2/36/4555/1.5/900/dynimg.jpg" width="600" height="399" /></p>
+
+    </section>
+    <section id='Dedham'>
+        <h3>Legacy Place, Dedham</h3>
+<p>Legacy Place is a popular shopping and entertainment destination just south of Boston in Dedham, MA. With over 80 stores, restaurants, and a movie theater, Legacy Place gets lots of foot traffic. While nearby, the closest branch (being located just across the busy Providence Highway) may be hard to access for shoppers on foot.</p>
+<p><img src="https://i.imgur.com/pic7u6a.jpg" /></p>
+<p>&nbsp;</p>
+		
+		
+	</p>
+        <small id="citation">
+            Location Sources: <a href='https://locations.santanderbank.com'>Santander Bank Branch Locator</a>
+			<p>&nbsp;</p>
+			<p>Map Created by Aaron Doucett</p>
+			<p><a href="http://doucett.net">Doucett.net</a></p>
+	
+        </small>
+    </section>
+</div>
+
+
+
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2FjdHVzdGVzdCIsImEiOiJjaml5cWl2d3owZGFjM2twY3dtM3hvenIzIn0.e8NDHh5nj5y_X-VIpIl6oA';
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/adoucett/cjjomzr1k6ume2sqr3xe5iut1',
+    center: [-71.090562, 42.348005],
+    zoom: 12,
+    bearing: 0,
+    pitch: 23
+});
+
+var chapters = {
+    'Map_Overview': {
+        bearing: 0,
+        center: [-71.090562, 42.348005],
+        zoom: 12,
+        pitch: 23
+    },
+    'Harvard_Square': {
+        duration: 6000,
+        center: [-71.117527, 42.373959],
+        bearing: 7,
+        zoom: 14.6,
+        pitch: 47,
+        speed: 0.3
+    },
+    'South_Boston': {
+        bearing: 0,
+        center: [-71.037910, 42.335522],
+        zoom: 14,
+        speed: 0.4,
+        pitch: 27.5
+    },
+    'Coolidge_Corner': {
+        bearing: 12,
+        center: [-71.128940, 42.343823],
+        zoom: 13.3,
+        speed: 0.4
+       
+    },
+    'East_Boston': {
+        bearing: 46.4,
+        center: [-71.033106, 42.371543],
+        zoom: 14,
+        pitch: 28,
+        speed: 0.5
+    },
+    'Medford': {
+        bearing: 20.8,
+        center: [-71.109441, 42.418611],
+        zoom: 13.4,
+	pitch: 0,
+	speed: 0.6
+    },
+    'Salem': {
+        bearing: -42.4,
+        center: [-70.893823, 42.514966],
+        zoom: 13.6,
+        pitch: 12,
+        speed: 0.4
+    },
+    'Dedham': {
+        bearing: 9,
+        center: [-71.176030, 42.235024],
+        zoom: 14.4,
+        pitch: 55.5,
+        speed: 0.6
+    }
+};
+
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+
+var activeChapterName = 'Map_Overview';
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+
+    map.flyTo(chapters[chapterName]);
+
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+
+    activeChapterName = chapterName;
+}
+
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+
+</script>
+
+</body>
+</html>
