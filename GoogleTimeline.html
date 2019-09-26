@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<title>Display a map with a custom style</title>
+<title>Location Data Map</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.css' rel='stylesheet' />
@@ -22,6 +22,9 @@ style: 'mapbox://styles/testbox01101/ck10qreif00981clchccb5492', //hosted style 
 center: [-71.84, 42.767], // starting position
 zoom: 7 // starting zoom
 });
+
+map.addControl(new mapboxgl.NavigationControl());
+
 </script>
  
 </body>
