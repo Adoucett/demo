@@ -101,7 +101,13 @@
         map.on('click', 'bgs-layer', function (e) {
             const coordinates = e.lngLat;
             const properties = e.features[0].properties;
-            const description = `<strong>Year:</strong> ${properties['YEAR']}<br><strong>AREA:</strong> ${properties['Area_KM2']}`;
+            const price = (properties['Area_KM2'] * 40).toFixed(2); // Calculate the price
+            const description = `
+                <strong>Year:</strong> ${properties['YEAR']}<br>
+                <strong>Area:</strong> ${properties['Area_KM2']} Square KM<br>
+                <strong>Price:</strong> $${price}<br>
+                <a href="www.barrgeo.com/html?item_id=${properties['id']}">Add to cart</a>
+            `;
 
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
