@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barr GeoSpatial Lidar Library: Coverage Map 2024</title>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* #menu {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .year-filter {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .year-filter input {
+      margin-right: 5px;
+    }
+
+    .year-filter button {
+      margin-left: 10px;
+      background: #0074D9;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      padding: 2px 5px;
+      font-size: 0.9em;
+    }
+
+    .year-filter button:hover {
+      background: #005BB5;
+    } */
+
+    #geocoder {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 50%;
+      max-width: 400px;
+      min-width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="map"></div>
+  <!-- <div id="menu">
+    <strong>Filter by Year</strong><br />
+    <div id="filters">
+    </div>
+  </div> -->
+  <div id="geocoder"></div>
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWRvdWNldHQiLCJhIjoiY2lvZDFsc2lwMDRnd3Zha2pneWpxcHh6biJ9.sbWgw2zPGyScsp-r4CYQnA';
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/adoucett/clwrzvkib01f501qe59uw0e3g',
+      center: [-115.0, 55.0],
+      zoom: 5
+    });
+
+    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+    });
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+    map.on('load', function() {
+      map.addSource('bgs-library', {
+        'type': 'vector',
+        'url': 'mapbox://adoucett.bhtpf1cq'
+      });
+
+      map.addLayer({
+        'id': 'bgs-layer',
+        'type': 'fill',
+        'source': 'bgs-library',
+        'source-layer': 'BGS_Library_2022-6acvdj',
+        'paint': {
+          'fill-color': [
+            'step',
+            ['get', 'YEAR'],
+            '#A1C9F2',
+            2008, '#87CEEB',
+            2009, '#66CCCC',
+            2010, '#45A2B8',
+            2011, '#3498DB',
+            2012, '#2E86C1',
+            2013, '#2471A3',
+            2014, '#1F618D',
+            2015, '#1978B8',
+            2016, '#1565C0',
+            2017, '#1166A3',
+            2018, '#0E586B',
+            2019, '#0B4574',
+            2020, '#07456F',
+            2021, '#063D6B',
+            2022, '#052B6E'
+          ],
+          'fill-opacity': 0.65
+        }
+      });
+
+      /* map.on('click', 'bgs-layer', function(e) {
+        const coordinates = e.lngLat;
+        const properties = e.features[0].properties;
+        const price = (properties['Area_KM2'] * 40).toFixed(2);
+        const formattedPrice = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+        }).format(parseFloat(price));
+
+        const description = `
+              <strong>Year:</strong> ${properties['YEAR']}<br>
+              <strong>Area:</strong> ${properties['Area_KM2']} Square KM<br>
+              <strong>Price:</strong> ${formattedPrice}<br>
+              <a href="www.barrgeo.com/html?item_id=${properties['id']}">Add to cart</a>
+          `;
+
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(description)
+          .addTo(map);
+      });
+
+      map.on('mouseenter', 'bgs-layer', function() {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      map.on('mouseleave', 'bgs-layer', function() {
+        map.getCanvas().style.cursor = '';
+      });
+
+      const filtersContainer = document.getElementById('filters');
+      const years = Array.from({ length: 15 }, (_, i) => i + 2008);
+
+      years.forEach(year => {
+        const filterDiv = document.createElement('div');
+        filterDiv.className = 'year-filter';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `year${year}`;
+        checkbox.checked = true;
+
+        const label = document.createElement('label');
+        label.htmlFor = `year${year}`;
+        label.innerText = year;
+
+        const onlyButton = document.createElement('button');
+        onlyButton.innerText = 'Only';
+        onlyButton.addEventListener('click', () => {
+          onlyFilter(year);
+        });
+
+        checkbox.addEventListener('change', filterLayers);
+
+        filterDiv.appendChild(checkbox);
+        filterDiv.appendChild(label);
+        filterDiv.appendChild(onlyButton);
+
+        filtersContainer.appendChild(filterDiv);
+      });
+
+      function filterLayers() {
+        const filters = ['any'];
+        years.forEach(year => {
+          if (document.getElementById(`year${year}`).checked) {
+            filters.push(['==', 'YEAR', year]);
+          }
+        });
+
+        if (filters.length === 1) {
+          map.setFilter('bgs-layer', ['==', 'YEAR', '']);
+        } else {
+          map.setFilter('bgs-layer', filters);
+        }
+      }
+
+      function onlyFilter(year) {
+        years.forEach(y => {
+          document.getElementById(`year${y}`).checked = (y === year);
+        });
+        filterLayers();
+      }
+
+      filterLayers(); */
+    });
+
+  </script>
+</body>
+
+</html>
